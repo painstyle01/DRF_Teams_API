@@ -11,10 +11,10 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
 class TeammateSerializer(serializers.HyperlinkedModelSerializer):
     team = serializers.SlugRelatedField(
-        many=False,
+        many=False, # Only one team per person
         slug_field="id",
         queryset = Team.objects.all(),
-        allow_null=True
+        allow_null=True # If just joined company and haven`t got team yet
     )
 
     class Meta:

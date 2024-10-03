@@ -9,6 +9,7 @@ from rest_framework.test import APITestCase
 
 class TeammateTest(APITestCase):
 
+    # Setting up test user
     def setUp(self):
         data = {
             "first_name": "Albert",
@@ -19,6 +20,7 @@ class TeammateTest(APITestCase):
 
         self.client.post(reverse("teammate-list"), data)
 
+    # Creating new user
     def test_create_teammate(self):
 
         data = {
@@ -31,6 +33,7 @@ class TeammateTest(APITestCase):
         response = self.client.post(reverse("teammate-list"), data)
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
 
+    # Get list of our users
     def test_get_teammates(self):
 
         response = self.client.get(reverse("teammate-list"))

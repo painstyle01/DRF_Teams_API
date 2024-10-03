@@ -20,12 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Let it be here, no production needed for now
 SECRET_KEY = 'django-insecure-dy40qn*&ok$^ik7#r+)(rv2s7x1cj1)%+$*)$vcdb13)iz!q56'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# TODO: Debugging allows. Change after hosts resolved.
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
+    'drf_spectacular', # Swagger UI
+    'rest_framework', # Django Rest Framework app
     'teams_resolver',
-    'drf_spectacular'
 ]
 
 MIDDLEWARE = [
@@ -76,6 +78,7 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Using SQLite, cause not production.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -130,6 +133,7 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
 
+# Some UI configs
 SPECTACULAR_SETTINGS = {
     "TITLE" : "Teams Control API",
     "DESCRIPTION" : "API that allows control team and teammates.",

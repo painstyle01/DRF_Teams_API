@@ -28,7 +28,7 @@ team_router.register(r'teammate', team_views.TeammateViewSet, basename="teammate
 urlpatterns = [
     path('api/', include(team_router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'), # API Schema for swagger ui
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'), # Swagger. Suggest as main route
     path('admin/', admin.site.urls),
 ]
