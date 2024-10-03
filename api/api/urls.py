@@ -1,5 +1,5 @@
 """
-URL configuration for teams_api project.
+URL configuration for api project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,8 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from rest_framework import routers
+from teams_resolver import views as team_views
+
+team_router = routers.DefaultRouter()
+team_router.register(r'team', team_views.TeamViewSet)
+team_router.register(r'teammate', team_views.TeammateViewSet)
 
 urlpatterns = [
+    path('', include(team_router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 ]
