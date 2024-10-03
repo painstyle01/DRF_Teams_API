@@ -17,15 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 from teams_resolver import views as team_views
 
 team_router = routers.DefaultRouter()
-team_router.register(r'team', team_views.TeamViewSet)
-team_router.register(r'teammate', team_views.TeammateViewSet)
+team_router.register(r'team', team_views.TeamViewSet, basename="team")
+team_router.register(r'teammate', team_views.TeammateViewSet, basename="teammate")
 
 urlpatterns = [
-    path('', include(team_router.urls)),
+    path('api/', include(team_router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),
     path('admin/', admin.site.urls),
 ]

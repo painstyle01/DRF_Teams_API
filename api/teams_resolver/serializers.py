@@ -1,4 +1,5 @@
 from .models import Teammate, Team
+
 from rest_framework import serializers
 
 
@@ -13,6 +14,7 @@ class TeammateSerializer(serializers.HyperlinkedModelSerializer):
         many=False,
         slug_field="id",
         queryset = Team.objects.all(),
+        allow_null=True
     )
 
     class Meta:
